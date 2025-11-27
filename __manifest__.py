@@ -3,7 +3,7 @@
 #
 
 {
-    'name': "Dino ERP Stock: Кастомный Склад",
+    'name': "Dino ERP Stock: Динамические производство",
     'summary': "Модуль для внедрения логики 'Склада' из презентации.",
     # ... остальные метаданные ...
     'version': '1.0',
@@ -17,7 +17,9 @@
 
     # Файлы, которые будут загружены в базу при установке. Порядок важен!
     'data': [
- 
+        'security/ir.model.access.csv',
+        #'views/product_origin_type_views.xml',
+        'views/product_component_views.xml'
 
     ],
     'installable': True,

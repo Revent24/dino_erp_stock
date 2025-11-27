@@ -1,4 +1,14 @@
 
+
+
+# РЕсурсы Odoo
+
+Документация https://www.odoo.com/documentation/19.0/index.html
+Готовые модули https://apps.odoo.com/apps/modules?series=19.0&price=Free
+
+
+
+
 # DINO24 ERP
 Это модуль динамического производства продукции
 
