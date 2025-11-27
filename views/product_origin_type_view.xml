@@ -7,8 +7,10 @@
             <form string="Тип Происхождения">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="code" help="Уникальный код для использования в Python-логике (например, 'purchase')."/>
+                        <field name="name" nolabel="1" class="oe_inline oe_text_size_full"/>
+                    </group>
+                    <group>
+                        <field name="comment"/>
                     </group>
                 </sheet>
             </form>
@@ -19,7 +21,8 @@
         <field name="name">product.origin.type.view.list</field>
         <field name="model">product.origin.type</field>
         <field name="arch" type="xml">
-            <list string="Типы Происхождения"> <field name="name"/>
+            <list string="Типы Происхождения" editable="bottom">
+                <field name="name"/>
                 <field name="code"/>
             </list>
         </field>

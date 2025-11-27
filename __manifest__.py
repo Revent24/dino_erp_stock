@@ -12,7 +12,8 @@
     'depends': [
         'base', 
         'stock',
-        'mrp', # Убедитесь, что mrp действительно нужен вашему модулю
+        'mrp', 
+        'sale',
     ],
 
     # Файлы, которые будут загружены в базу при установке. Порядок важен!
@@ -21,6 +22,7 @@
         'views/product_origin_type_view.xml',
         'views/product_template_view.xml', 
         'views/product_category_view.xml',
+        'views/product_template_action.xml',
     ],
     'installable': True,
     'application': True,

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product.product_template_action" model="ir.actions.act_window">
+        <field name="views" eval="[(ref('dino_erp_stock.product_template_form_view_dino_optimization_v3'), 'form'),
+                                   (False, 'tree'), 
+                                   (False, 'kanban'), 
+                                   (False, 'activity')]"/>
+    </record>
+</odoo>

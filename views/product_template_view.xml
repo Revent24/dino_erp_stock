@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="product_template_form_view_dino_erp_stock_cost" model="ir.ui.view">
-        <field name="name">product.template.form.dino_erp_stock.cost</field>
+    <record id="product_template_form_view_dino_optimization_v3" model="ir.ui.view">
+        <field name="inherit_id" ref="product.product_template_only_form_view"/> 
+        <field name="name">product.template.form.dino.optimization.final.v3</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        
+        <field name="priority" eval="1"/> 
+        
         <field name="arch" type="xml">
-            
-            <xpath expr="//div[@name='options']" position="inside">
-                <field name="purchase_required" widget="badge" decoration-warning="purchase_required == True" invisible="purchase_required == False"/>
-            </xpath>
-            
-            <xpath expr="//field[@name='categ_id']" position="after">
-                <field name="apply_analogs"/>
+
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <field name="categ_id" 
+                       options="{'no_create': True}" 
+                       string="Категория (Определяющая)"/>
             </xpath>
 
-            <xpath expr="//field[@name='list_price']" position="after">
-                <field name="calculated_cost" readonly="1" groups="base.group_user"/>
-                <field name="actual_cost" readonly="1" groups="base.group_user"/>
-                <field name="min_qty"/>
-                <field name="qty_available_with_analogs" readonly="1"/>
+            <xpath expr="//field[@name='categ_id']" position="attributes">
+                <attribute name="invisible">1</attribute> 
             </xpath>
             
-            <xpath expr="//notebook" position="inside">
-                <page name="dino_analogs" string="Аналоги (Dino Stock)" invisible="[('apply_analogs', '!=', True)]">
-                    <group>
-                        <field name="analog_ids" widget="many2many_tags"/>
-                    </group>
-                </page>
+            <xpath expr="//field[@name='sale_ok']" position="attributes">
+                 <attribute name="invisible">1</attribute>
             </xpath>
-
+            <xpath expr="//field[@name='purchase_ok']" position="attributes">
+                 <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tracking']" position="attributes">
+                 <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
         </field>
     </record>
 </odoo>

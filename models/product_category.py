@@ -5,12 +5,15 @@
 
 from odoo import models, fields
 
+
 class ProductCategory(models.Model):
     _inherit = 'product.category'
 
+    name = fields.Char(translate=True)
+
     dino_origin_type_id = fields.Many2one( 
         'product.origin.type', 
-        string="Dino: Тип происхождения",
+        string="Тип происхождения",
         required=True,
         ondelete='restrict', 
     )

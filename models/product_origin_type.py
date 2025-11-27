@@ -10,8 +10,20 @@ class DinoOriginType(models.Model):
     _description = 'Тип Происхождения Товара'
     _order = 'name'
 
-    name = fields.Char(string="Название типа", required=True)
+    # ПОЛЕ: Наименование типа происхождения
+    name = fields.Char(
+        string="Название типа",
+        required=True, 
+        translate=True,
+    )
     
+    # ПОЛЕ: Описание типа происхождения
+    comment = fields.Text(
+        string="Описание",
+        translate=True, # Включает поддержку мультиязычности
+        help="Полное описание Типа Происхождения Товара."
+    )
+    #ПОЛЕ: Технический код типа происходждения
     code = fields.Char(
         string="Технический код", 
         readonly=True, # Поле только для чтения, генерируется автоматически
@@ -32,7 +44,6 @@ class DinoOriginType(models.Model):
 
         # 2. Генерируем код для каждой созданной записи
         for record in records:
-            # Проверка нужна, если кто-то попытается создать запись с уже заполненным code
             if not record.code:
                 # Генерация кода: префикс 'OT_' + ID записи
                 new_code = 'OT_%s' % record.id
