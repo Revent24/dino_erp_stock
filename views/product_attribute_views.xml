@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="dino_attribute_view_form" model="ir.ui.view">
+        <field name="name">dino.attribute.view.form</field>
+        <field name="model">dino.attribute</field>
+        <field name="arch" type="xml">
+            <form string="Attribute">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Values" name="values">
+                            <field name="value_ids">
+                                <list string="Values" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="numeric_value"/>
+                                    <field name="uom_id" options="{'no_create': True}"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                    <chatter/>
+            </form>
+        </field>
+    </record>
+
+</data>
+</odoo>

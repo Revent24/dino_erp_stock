@@ -93,11 +93,28 @@
                         </group>
                     </group>
                     <notebook>
+
                         <page name="general" string="General Information">
                             <group name="internal_notes" string="Internal Notes">
                                 <field name="description" nolabel="1" colspan="2" placeholder="This note is only for internal purposes."/>
                             </group>
                         </page>
+
+                        <page string="Attributes" name="attributes">
+                            <field name="attribute_line_ids">
+                                <list string="Attributes" editable="bottom">
+                                    <field name="attribute_id" 
+                                        options="{'no_create_edit': True}"
+                                        placeholder="Название атрибута"/>
+                                    
+                                    <field name="value_ids" widget="many2many_tags" 
+                                        options="{'no_open': True, 'no_create_edit': True}" 
+                                        context="{'default_attribute_id': attribute_id}"
+                                        domain="[('attribute_id', '=', attribute_id)]"/>
+                                </list>
+                            </field>
+                        </page>
+
                     </notebook>
                 </sheet>
                     <chatter/>

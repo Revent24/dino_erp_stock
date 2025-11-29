@@ -29,6 +29,9 @@ class DinoProductComponent(models.Model):
     def toggle_is_favorite(self):
         for rec in self:
             rec.is_favorite = not rec.is_favorite
+    
+    # Вложенная таблица Атрибуты
+    attribute_line_ids = fields.One2many('dino.component.attribute.line', 'component_id', string=_('Attributes'))
 
-    # Добавляем поле заметок (Text для простого текста, translate=True для перевода самого текста заметки)
+    # Поле заметок (Htm для форматируемого текста, translate=True для перевода самого текста заметки)
     description = fields.Html(string=_('Internal Notes'), translate=True)
