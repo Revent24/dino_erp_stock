@@ -12,7 +12,7 @@ class DinoProductComponent(models.Model):
     
     # Используем _() чтобы Odoo точно знал, что это метка для перевода
     name = fields.Char(string=_('Component Name'), required=True, tracking=True, translate=True)
-    code = fields.Char(string=_('Internal Reference'), copy=False, default='New', tracking=True)
+    code = fields.Char(string=_('Internal Reference'), copy=False, tracking=True)
 
     qty_available = fields.Float(string=_('On Hand'), default=0.0) 
     
