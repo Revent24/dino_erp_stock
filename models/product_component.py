@@ -33,5 +33,25 @@ class DinoProductComponent(models.Model):
     # Вложенная таблица Атрибуты
     attribute_line_ids = fields.One2many('dino.component.attribute.line', 'component_id', string=_('Attributes'))
 
+    # Связь с BOM
+    bom_ids = fields.One2many('dino.bom', 'component_id', string=_('BOMs'))
+    bom_count = fields.Integer(string=_('BOM Count'), compute='_compute_bom_count')
+
+    @api.depends('bom_ids')
+    def _compute_bom_count(self):
+        for rec in self:
+            rec.bom_count = len(rec.bom_ids)
+
+    def action_view_boms(self):
+        self.ensure_one()
+        return {
+            'name': _('Specifications'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'dino.bom',
+            'view_mode': 'list,form',
+            'domain': [('component_id', '=', self.id)],
+            'context': {'default_component_id': self.id},
+        }
+
     # Поле заметок (Htm для форматируемого текста, translate=True для перевода самого текста заметки)
     description = fields.Html(string=_('Internal Notes'), translate=True)

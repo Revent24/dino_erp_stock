@@ -21,8 +21,9 @@
     'data': [
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
-        'views/product_component_views.xml',
-        'views/product_attribute_views.xml',
+        'views/product_component_views.xml',    # <-- Компоненты
+        'views/product_attribute_views.xml',    # <-- Атрибуты
+        'views/product_component_bom_views.xml', # <-- Спецификации
     ],
     'installable': True,
     'application': True,

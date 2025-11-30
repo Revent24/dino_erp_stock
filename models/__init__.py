@@ -4,3 +4,4 @@
 #
 from . import product_component
 from . import product_component_attribute # Атрибуты компонентов
+from . import product_component_bom # Ведомости материалов (Спецификации)

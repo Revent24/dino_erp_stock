@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0-20251116\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-29 01:11+0000\n"
-"PO-Revision-Date: 2025-11-29 01:11+0000\n"
+"POT-Creation-Date: 2025-11-30 14:57+0000\n"
+"PO-Revision-Date: 2025-11-30 14:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,167 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_needaction
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_needaction
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_needaction
 msgid "Action Needed"
 msgstr "Необхідна дія"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__active
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__active
 msgid "Active"
 msgstr "Активно"
 
 #. module: dino_erp_stock
-#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
-msgid "Add other fields here if needed."
-msgstr "Додайте тут інші поля, якщо потрібно."
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_ids
+msgid "Activities"
+msgstr "Дії"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_exception_decoration
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_exception_decoration
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Оформлення виключення дії"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_state
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_state
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_state
+msgid "Activity State"
+msgstr "Стан дії"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_type_icon
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_type_icon
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Іконка типу дії"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__alternative_component_ids
+msgid "Alternatives"
+msgstr "Аналоги"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__attribute_value_ids
+msgid "Apply on Variants"
+msgstr "Застосувати до варіантів"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_attachment_count
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_attachment_count
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_attachment_count
 msgid "Attachment Count"
 msgstr "Кількість прикріплень"
 
 #. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__attribute_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__attribute_id
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_attribute_view_form
+msgid "Attribute"
+msgstr "Атрибут"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__name
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__display_name
+msgid "Attribute Name"
+msgstr "Назва атрибута"
+
+#. module: dino_erp_stock
+#: model:ir.model,name:dino_erp_stock.model_dino_attribute_value
+msgid "Attribute Value"
+msgstr "Значення атрибута"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__attribute_line_ids
 #: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+msgid "Attributes"
+msgstr "Атрибути"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__available_attribute_ids
+msgid "Available Attribute"
+msgstr "Доступний атрибут"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__bom_id
+msgid "BOM"
+msgstr "Специфікація"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__bom_count
+msgid "BOM Count"
+msgstr "К-сть специфікацій"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__bom_ids
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_tree
+msgid "BOMs"
+msgstr "Специфікації"
+
+#. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_form
+msgid "Bill of Material"
+msgstr "Специфікація"
+
+#. module: dino_erp_stock
+#: model:ir.model,name:dino_erp_stock.model_dino_bom
+msgid "Bill of Materials"
+msgstr "Специфікація"
+
+#. module: dino_erp_stock
+#: model:ir.model,name:dino_erp_stock.model_dino_bom_line
+msgid "Bill of Materials Line"
+msgstr "Рядок специфікації"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__code
+msgid "Code"
+msgstr "Код"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__component_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__component_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__component_id
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_kanban
 msgid "Component"
 msgstr "Компонент"
+
+#. module: dino_erp_stock
+#: model:ir.model,name:dino_erp_stock.model_dino_attribute
+msgid "Component Attribute"
+msgstr "Атрибут компонента"
+
+#. module: dino_erp_stock
+#: model:ir.model,name:dino_erp_stock.model_dino_component_attribute_line
+msgid "Component Attribute Line"
+msgstr "Рядок атрибута компонента"
 
 #. module: dino_erp_stock
 #. odoo-python
@@ -49,8 +187,12 @@ msgid "Component Name"
 msgstr "Назва компонента"
 
 #. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
 #: model:ir.actions.act_window,name:dino_erp_stock.dino_product_component_action
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__line_ids
 #: model:ir.ui.menu,name:dino_erp_stock.dino_product_component_menu
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_form
 #: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_tree
 msgid "Components"
 msgstr "Компоненти"
@@ -63,16 +205,31 @@ msgid "Cost"
 msgstr "Вартість"
 
 #. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_kanban
+msgid "Cost:"
+msgstr "Вартість:"
+
+#. module: dino_erp_stock
 #: model_terms:ir.actions.act_window,help:dino_erp_stock.dino_product_component_action
 msgid "Create a new component."
 msgstr "Створити новий компонент."
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__create_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__create_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__create_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__create_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__create_uid
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__create_uid
 msgid "Created by"
 msgstr "Створив"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__create_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__create_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__create_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__create_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__create_date
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__create_date
 msgid "Created on"
 msgstr "Створено"
@@ -80,6 +237,9 @@ msgstr "Створено"
 #. module: dino_erp_stock
 #. odoo-python
 #: code:addons/dino_erp_stock/models/product_component.py:0
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__currency_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__currency_id
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__currency_id
 msgid "Currency"
 msgstr "Валюта"
@@ -90,9 +250,13 @@ msgid "Dino Product Component"
 msgstr "Компонент продукту Dino"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__display_name
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__display_name
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__display_name
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__display_name
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__display_name
 msgid "Display Name"
-msgstr "Відображати ім'я"
+msgstr "Назва для відображення"
 
 #. module: dino_erp_stock
 #. odoo-python
@@ -102,14 +266,25 @@ msgid "Favorite"
 msgstr "Вибране"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_follower_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_follower_ids
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_follower_ids
 msgid "Followers"
 msgstr "Підписники"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_partner_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_partner_ids
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Підписники (Партнери)"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__activity_type_icon
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__activity_type_icon
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Іконка Font awesome, наприклад, fa-tasks"
 
 #. module: dino_erp_stock
 #: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
@@ -117,21 +292,48 @@ msgid "General Information"
 msgstr "Загальна інформація"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__has_message
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__has_message
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__has_message
 msgid "Has Message"
 msgstr "Є повідомлення"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__id
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__id
 msgid "ID"
 msgstr "ID"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_exception_icon
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_exception_icon
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_exception_icon
+msgid "Icon"
+msgstr "Іконка"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__activity_exception_icon
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__activity_exception_icon
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Значок, що позначає виключення дії."
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__message_needaction
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__message_needaction
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr "Якщо позначено, нові повідомлення потребують вашої уваги."
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__message_has_error
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__message_has_sms_error
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__message_has_error
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__message_has_sms_error
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__message_has_error
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
@@ -165,54 +367,121 @@ msgstr "Зображення 512"
 #. module: dino_erp_stock
 #. odoo-python
 #: code:addons/dino_erp_stock/models/product_component.py:0
-#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__code
-msgid "Internal Reference"
-msgstr "Внутрішнє посилання"
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__description
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+msgid "Internal Notes"
+msgstr "Внутрішні примітки"
 
 #. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__code
+msgid "Internal Reference"
+msgstr "Артикул"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_is_follower
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_is_follower
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_is_follower
 msgid "Is Follower"
 msgstr "Підписник"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__write_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__write_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__write_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__write_uid
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__write_uid
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__write_uid
 msgid "Last Updated by"
 msgstr "Востаннє оновив"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__write_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__write_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__write_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__write_date
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__write_date
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__write_date
 msgid "Last Updated on"
 msgstr "Останнє оновлення"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_has_error
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_has_error
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_has_error
 msgid "Message Delivery error"
 msgstr "Помилка доставки повідомлення"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_ids
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_ids
 msgid "Messages"
 msgstr "Повідомлення"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Крайній термін моєї активності"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_date_deadline
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_date_deadline
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Крайній термін наступної дії"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_summary
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_summary
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_summary
+msgid "Next Activity Summary"
+msgstr "Підсумок наступної дії"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_type_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_type_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_type_id
+msgid "Next Activity Type"
+msgstr "Тип наступної дії"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_needaction_counter
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_needaction_counter
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Кількість дій"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_has_error_counter
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_has_error_counter
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_has_error_counter
 msgid "Number of errors"
 msgstr "Кількість помилок"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__message_needaction_counter
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__message_needaction_counter
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__message_needaction_counter
 msgid "Number of messages requiring action"
 msgstr "Кількість повідомлень, що вимагають дії"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__message_has_error_counter
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__message_has_error_counter
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Кількість повідомлень з помилкою доставки"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__numeric_value
+msgid "Numeric Value"
+msgstr "Числове значення"
 
 #. module: dino_erp_stock
 #. odoo-python
@@ -222,24 +491,172 @@ msgid "On Hand"
 msgstr "В наявності"
 
 #. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_kanban
+msgid "On Hand:"
+msgstr "В наявності:"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__qty
+msgid "Quantity"
+msgstr "Кількість"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__name
+msgid "Reference"
+msgstr "Посилання"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__activity_user_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__activity_user_id
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__activity_user_id
+msgid "Responsible User"
+msgstr "Відповідальний користувач"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__message_has_sms_error
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__message_has_sms_error
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr "Помилка доставки SMS"
 
 #. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_form
+msgid "Select Component..."
+msgstr "Оберіть компонент..."
+
+#. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_form
+msgid "Select attributes (e.g. 2000mm)"
+msgstr "Оберіть атрибути (напр. 2000мм)"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__sequence
+msgid "Sequence"
+msgstr "Порядок"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+#: model:ir.actions.act_window,name:dino_erp_stock.dino_bom_action
+#: model:ir.ui.menu,name:dino_erp_stock.dino_bom_menu
+msgid "Specifications"
+msgstr "Специфікації"
+
+#. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+msgid "Specs"
+msgstr "Спец."
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__activity_state
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__activity_state
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Статус на основі активностей\n"
+"Прострочено: термін виконання вже минув\n"
+"Сьогодні: дата активності сьогодні\n"
+"Заплановано: майбутні активності."
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__total_cost
+msgid "Subtotal"
+msgstr "Підсумок"
+
+#. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+msgid "This note is only for internal purposes."
+msgstr "Ця примітка призначена лише для внутрішніх цілей."
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__total_cost
+msgid "Total Cost"
+msgstr "Загальна вартість"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__activity_exception_decoration
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__activity_exception_decoration
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Тип активності виключення в записі."
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom_line__cost
+msgid "Unit Cost"
+msgstr "Вартість од."
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__uom_id
+msgid "Units"
+msgstr "Од. вим."
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute_value__name
+msgid "Value Name"
+msgstr "Назва значення"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_attribute.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__value_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_component_attribute_line__value_ids
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_attribute_view_form
+msgid "Values"
+msgstr "Значення"
+
+#. module: dino_erp_stock
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_bom_view_form
+msgid "Variant Configuration"
+msgstr "Налаштування варіанту"
+
+#. module: dino_erp_stock
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component_bom.py:0
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__version
+msgid "Version"
+msgstr "Версія"
+
+#. module: dino_erp_stock
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_attribute__website_message_ids
+#: model:ir.model.fields,field_description:dino_erp_stock.field_dino_bom__website_message_ids
 #: model:ir.model.fields,field_description:dino_erp_stock.field_dino_product_component__website_message_ids
 msgid "Website Messages"
 msgstr "Повідомлення з веб-сайту"
 
 #. module: dino_erp_stock
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_attribute__website_message_ids
+#: model:ir.model.fields,help:dino_erp_stock.field_dino_bom__website_message_ids
 #: model:ir.model.fields,help:dino_erp_stock.field_dino_product_component__website_message_ids
 msgid "Website communication history"
 msgstr "Історія спілкування з веб-сайту"
 
 #. module: dino_erp_stock
-msgid "Internal Notes"
-msgstr "Внутрішні примітки"
+#. odoo-python
+#: code:addons/dino_erp_stock/models/product_component.py:0
+msgid "component_id"
+msgstr "Компонент"
 
 #. module: dino_erp_stock
-msgid "This note is only for internal purposes."
-msgstr "Ця примітка призначена лише для внутрішніх цілей."
+#: model_terms:ir.ui.view,arch_db:dino_erp_stock.dino_product_component_view_form
+msgid "Attribute Name"
+msgstr "Назва атрибута"
