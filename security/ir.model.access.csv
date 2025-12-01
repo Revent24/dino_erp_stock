@@ -1,7 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_component_user,Product Component User,model_dino_product_component,base.group_user,1,1,1,1
-access_dino_attribute,Dino Attribute,model_dino_attribute,base.group_user,1,1,1,1
-access_dino_attribute_value,Dino Attribute Value,model_dino_attribute_value,base.group_user,1,1,1,1
-access_dino_component_attribute_line,Dino Component Attribute Line,model_dino_component_attribute_line,base.group_user,1,1,1,1
-access_dino_bom,Dino BOM,model_dino_bom,base.group_user,1,1,1,1
-access_dino_bom_line,Dino BOM Line,model_dino_bom_line,base.group_user,1,1,1,1
+access_dino_component,Dino Component Access,model_dino_component,base.group_user,1,1,1,1
+access_dino_nomenclature,Dino Nomenclature Access,model_dino_nomenclature,base.group_user,1,1,1,1
+access_dino_parameter,Dino Parameter Access,model_dino_parameter,base.group_user,1,1,1,1
+access_dino_bom_line,Dino BOM Line Access,model_dino_bom_line,base.group_user,1,1,1,1

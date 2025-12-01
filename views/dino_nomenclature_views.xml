@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="dino_nomenclature_action" model="ir.actions.act_window">
+        <field name="name">Nomenclature</field>
+        <field name="res_model">dino.nomenclature</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Execution / Nomenclature item.
+            </p>
+        </field>
+    </record>
+
+    <record id="dino_nomenclature_view_tree" model="ir.ui.view">
+        <field name="name">dino.nomenclature.view.list</field>
+        <field name="model">dino.nomenclature</field>
+        <field name="arch" type="xml">
+            <list string="Nomenclature">
+                <field name="fullname"/>      <field name="code"/>
+                <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="qty_available"/>
+                <field name="uom_id"/>
+            </list>
+        </field>
+    </record>
+    
+    <record id="dino_nomenclature_view_kanban" model="ir.ui.view">
+        <field name="name">dino.nomenclature.view.kanban</field>
+        <field name="model">dino.nomenclature</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <main class="pe-2">
+                            <div class="mb-1 fw-bold">
+                                <field name="fullname"/>
+                            </div>
+                            <div>
+                                Code: <field name="code"/>
+                            </div>
+                            <div>
+                                Cost: <field name="cost" widget="monetary"/>
+                            </div>
+                            <div class="mt-1">
+                                On Hand: <field name="qty_available"/>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="dino_nomenclature_view_form" model="ir.ui.view">
+        <field name="name">dino.nomenclature.view.form</field>
+        <field name="model">dino.nomenclature</field>
+        <field name="arch" type="xml">
+            <form string="Nomenclature">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="component_id" string="Component Family"/>
+                        <h2><field name="component_id" placeholder="e.g. Screw M4"/></h2>
+                        
+                        <label for="name" string="Execution Name (Suffix)"/>
+                        <h1><field name="name" placeholder="e.g. 12 mm"/></h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="uom_id"/>
+                        </group>
+                        <group>
+                            <field name="cost" widget="monetary"/>
+                            <field name="material_cost" widget="monetary" readonly="1"/>
+                            
+                            <field name="qty_available"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Specification" name="bom">
+                            <field name="bom_line_ids">
+                                <list string="Components" editable="bottom">
+                                    <field name="component_id" width="30%" 
+                                           options="{'no_create': True}"/>
+                                           
+                                    <field name="nomenclature_ids" 
+                                           widget="many2many_tags" 
+                                           width="40%"
+                                           placeholder="Select specific executions..."
+                                           domain="[('component_id', '=', component_id)]"
+                                           options="{'no_create': True}"/>
+                                           
+                                    <field name="qty" width="10%"/>
+                                    <field name="cost" widget="monetary" width="10%"/>
+                                    <field name="total_cost" widget="monetary" width="10%"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="material_cost" widget="monetary"/>
+                            </group>
+                        </page>
+
+                        <page string="Parameters" name="parameters">
+                            <field name="parameter_ids">
+                                <list string="Technical Parameters" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" placeholder="Parameter (e.g. Length)"/>
+                                    <field name="value"/>
+                                    <field name="uom_id" options="{'no_create': True}"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="dino_component_menu_root"
+              name="Components (Families)"
+              parent="stock.menu_stock_inventory_control" 
+              action="dino_component_action"
+              sequence="5"/>
+              
+    <menuitem id="dino_nomenclature_menu"
+              name="Nomenclature (Executions)"
+              parent="stock.menu_stock_inventory_control" 
+              action="dino_nomenclature_action"
+              sequence="6"/>
+
+</data>
+</odoo>

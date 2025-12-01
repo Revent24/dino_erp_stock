@@ -1,29 +1,31 @@
-#
-# --- /dino_erp_stock/__manifest__.py ---
+# --- МАНИФЕСТ МОДУЛЯ
+# --- ФАЙЛ: dino_erp_stock/__manifest__.py
 #
 
 {
-    'name': "Dino ERP Stock: Динамические производство",
-    'summary': "Модуль для внедрения логики 'Склада' из презентации.",
-    # ... остальные метаданные ...
-    'version': '1.0',
-
-    # ЗАВИСИМОСТИ
-    'depends': [
-        'base', # база
-        'stock', # склад
-        'mrp', # управление запасами
-        'mail',  # обсуждение
-        'uom'
+    'name': 'Dino ERP Stock',
+    'version': '2.0',
+    'summary': 'Custom Component & Nomenclature Management',
+    'author': 'Stepan',
+    'category': 'Manufacturing',
+'depends': [
+        'base',      # Ядро системы, права пользователей, image.mixin
+        'mail',      # Чаттер, сообщения, активности
+        'uom',       # Единицы измерения (шт, кг, м)
+        'product',   # Категорий товаров (product.category)
+        'stock',     # Склад (для меню и будущей интеграции остатков)
+        'mrp',       # Производство (пусть будет для совместимости меню)
     ],
-
-    # Файлы, которые будут загружены в базу при установке. Порядок важен!
     'data': [
+        # 1. Права доступа (Всегда первыми)
         'security/ir.model.access.csv',
+        
+        # 2. Системные данные (Авто-нумерация артикулов)
         'data/ir_sequence_data.xml',
-        'views/product_component_views.xml',    # <-- Компоненты
-        'views/product_attribute_views.xml',    # <-- Атрибуты
-        'views/product_component_bom_views.xml', # <-- Спецификации
+        
+        # 3. Интерфейс (Views)
+        'views/dino_component_views.xml',    # Меню и формы Семейств
+        'views/dino_nomenclature_views.xml', # Меню и формы Номенклатуры
     ],
     'installable': True,
     'application': True,
