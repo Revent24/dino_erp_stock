@@ -1,4 +1,4 @@
-# --- МОДУЛЬ: КОМПОНЕНТЫ
+# --- МОДЕЛЬ: АТРИБУТЫ КОМПОНЕНТА
 # --- \dino24_addons\dino_erp_stock\models\product_component_attribute.py 
 #
 

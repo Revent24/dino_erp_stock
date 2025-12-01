@@ -1,6 +1,7 @@
-# --- МОДУЛЬ: КОМПОНЕНТЫ
-# --- \dino24_addons\dino_erp_stock\models\product_component.py 
+# --- МОДЕЛЬ: КОМПОНЕНТЫ (ОСНОВНАЯ СУЩНОСТЬ)
+# --- ФАЙЛ: \dino24_addons\dino_erp_stock\models\product_component.py
 #
+
 from odoo import fields, models, _, api
 
 class DinoProductComponent(models.Model):
@@ -10,55 +11,44 @@ class DinoProductComponent(models.Model):
 
     active = fields.Boolean('Active', default=True)
     
-    # Используем _() чтобы Odoo точно знал, что это метка для перевода
     name = fields.Char(string=_('Component Name'), required=True, tracking=True, translate=True)
     code = fields.Char(string=_('Internal Reference'), copy=False, tracking=True)
 
     qty_available = fields.Float(string=_('On Hand'), default=0.0) 
     
-    currency_id = fields.Many2one('res.currency', string=_('Currency'), 
+    currency_id = fields.Many2one('res.currency', string='Currency', 
                                   default=lambda self: self.env.company.currency_id)
     
+    # Собственная цена компонента (например, цена закупки или производства)
     cost = fields.Monetary(string=_('Cost'), currency_field='currency_id', default=0.0)
+    
     is_favorite = fields.Boolean(string=_('Favorite'))
+
+    # === АТРИБУТЫ (Связь с моделью строк атрибутов) ===
+    attribute_line_ids = fields.One2many('dino.component.attribute.line', 'component_id', string=_('Attributes'))
+
+    # === СПЕЦИФИКАЦИЯ (Встроенная) ===
+    # Ссылка на строки BOM, где этот компонент является Родителем
+    bom_line_ids = fields.One2many('dino.bom.line', 'parent_component_id', string=_('Bill of Materials'))
+    
+    # Стоимость материалов (Сумма всех строк спецификации)
+    # Это поле показывает, сколько стоит собрать этот компонент из других
+    material_cost = fields.Monetary(string=_('Material Cost'), compute='_compute_material_cost', currency_field='currency_id', store=True)
+
+    # Поле для заметок (HTML редактор)
+    description = fields.Html(string=_('Internal Notes'), translate=True)
 
     _sql_constraints = [
         ('code_unique', 'unique (code)', 'The internal reference must be unique.'),
     ]
     
+    @api.depends('bom_line_ids.total_cost')
+    def _compute_material_cost(self):
+        for rec in self:
+            rec.material_cost = sum(line.total_cost for line in rec.bom_line_ids)
+            
     def toggle_is_favorite(self):
         for rec in self:
             rec.is_favorite = not rec.is_favorite
-    
-    # Вложенная таблица Атрибуты
-    attribute_line_ids = fields.One2many('dino.component.attribute.line', 'component_id', string=_('Attributes'))
 
-    # Связь с BOM
-    bom_ids = fields.One2many('dino.bom', 'component_id', string=_('BOMs'))
-    bom_count = fields.Integer(string=_('BOM Count'), compute='_compute_bom_count')
-
-    @api.depends('bom_ids')
-    def _compute_bom_count(self):
-        for rec in self:
-            rec.bom_count = len(rec.bom_ids)
-
-    def action_view_boms(self):
-        self.ensure_one()
-        return {
-            'name': _('Specifications'),
-            'type': 'ir.actions.act_window',
-            'res_model': 'dino.bom',
-            'view_mode': 'list,form',
-            'domain': [('component_id', '=', self.id)],
-            'context': {'default_component_id': self.id},
-        }
-
-    # Поле для указания "Родителя" (Базового изделия)
-    # Например, для "Ручка 810мм" родителем будет "Ручка внешняя"
-    parent_id = fields.Many2one('dino.product.component', string=_('Parent Component'))
-    
-    # Обратная связь (чтобы видеть всех детей в карточке родителя)
-    child_ids = fields.One2many('dino.product.component', 'parent_id', string=_('Variants/Modifications'))
-    
-    # Поле заметок (Htm для форматируемого текста, translate=True для перевода самого текста заметки)
-    description = fields.Html(string=_('Internal Notes'), translate=True)
+# --- END ---
