@@ -53,5 +53,12 @@ class DinoProductComponent(models.Model):
             'context': {'default_component_id': self.id},
         }
 
+    # Поле для указания "Родителя" (Базового изделия)
+    # Например, для "Ручка 810мм" родителем будет "Ручка внешняя"
+    parent_id = fields.Many2one('dino.product.component', string=_('Parent Component'))
+    
+    # Обратная связь (чтобы видеть всех детей в карточке родителя)
+    child_ids = fields.One2many('dino.product.component', 'parent_id', string=_('Variants/Modifications'))
+    
     # Поле заметок (Htm для форматируемого текста, translate=True для перевода самого текста заметки)
     description = fields.Html(string=_('Internal Notes'), translate=True)

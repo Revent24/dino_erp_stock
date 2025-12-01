@@ -98,6 +98,10 @@
                         <group>
                             <field name="qty_available"/>
                         </group>
+                        <group>
+                            <field name="qty_available"/>
+                            <field name="parent_id" placeholder="Например: Ручка внешняя (базовая)"/>
+                        </group>
                     </group>
                     
                     <notebook>
