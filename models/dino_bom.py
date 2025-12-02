@@ -33,6 +33,37 @@ class DinoBomLine(models.Model):
     # Сумма
     total_cost = fields.Monetary(string=_('Subtotal'), compute='_compute_total_cost', currency_field='currency_id', store=True)
 
+    # === МЕТОД ДЛЯ КНОПКИ (ОТКРЫТИЕ АНАЛОГОВ) ===
+    def action_open_analogs(self):
+        self.ensure_one()
+        if not self.nomenclature_ids:
+            return # Если ничего не выбрано - ничего не делаем
+
+        # Получаем ID выбранных аналогов
+        analog_ids = self.nomenclature_ids.ids
+
+        # Сценарий 1: Выбран только один - открываем его Форму
+        if len(analog_ids) == 1:
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'dino.nomenclature',
+                'res_id': analog_ids[0],
+                'view_mode': 'form',
+                'target': 'current',
+            }
+        
+        # Сценарий 2: Выбрано несколько - открываем их Список
+        else:
+            return {
+                'name': _('Selected Analogs'),
+                'type': 'ir.actions.act_window',
+                'res_model': 'dino.nomenclature',
+                'domain': [('id', 'in', analog_ids)],
+                'view_mode': 'list,form',
+                'target': 'current',
+            }
+    # ============================================
+
     @api.depends('nomenclature_ids.cost')
     def _compute_cost(self):
         for line in self:

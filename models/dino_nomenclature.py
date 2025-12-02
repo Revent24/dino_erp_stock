@@ -45,6 +45,13 @@ class DinoNomenclature(models.Model):
     # Стоимость материалов (Сумма BOM)
     material_cost = fields.Monetary(string=_('Material Cost'), compute='_compute_material_cost', currency_field='currency_id', store=True)
 
+    # Назначение исполнения (краткая заметка к названию)
+    purpose = fields.Char(string=_('Purpose'), translate=True, help="Short description of the execution")
+
+    # Внутренние заметки
+    description = fields.Html(string=_('Internal Notes'), translate=True)
+    
+    
     # === ЛОГИКА ===
     
     # Автоматическая склейка имени
@@ -61,6 +68,30 @@ class DinoNomenclature(models.Model):
     def _compute_material_cost(self):
         for rec in self:
             rec.material_cost = sum(line.total_cost for line in rec.bom_line_ids)
+
+    # Метод для кнопки "Стрелочка"
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'name': self.fullname,
+            'type': 'ir.actions.act_window',
+            'res_model': 'dino.nomenclature',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'current', # Открыть в текущем окне 'current' (или 'new' для модального)
+        }
+
+    # === ЛОГИКА ОТОБРАЖЕНИЯ ИМЕНИ ===
+    @api.depends('name', 'fullname')
+    @api.depends_context('show_short_name') # Слушаем контекст из XML
+    def _compute_display_name(self):
+        for rec in self:
+            # Если в контексте пришел флаг - показываем только суффикс (810 мм)
+            if self.env.context.get('show_short_name'):
+                rec.display_name = rec.name
+            else:
+                # Иначе показываем полное имя (Ручка внешняя 810 мм)
+                rec.display_name = rec.fullname
 
     _sql_constraints = [
         # Нельзя создать два одинаковых суффикса внутри одного семейства

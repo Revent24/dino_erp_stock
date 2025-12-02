@@ -8,7 +8,7 @@
         <field name="view_mode">list,kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new Execution / Nomenclature item.
+                Create a new Nomenclature item.
             </p>
         </field>
     </record>
@@ -18,10 +18,13 @@
         <field name="model">dino.nomenclature</field>
         <field name="arch" type="xml">
             <list string="Nomenclature">
-                <field name="fullname"/>      <field name="code"/>
+                <field name="fullname"/>
+                <field name="purpose" optional="show"/>
+                <field name="code" optional="hide"/>
                 <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="qty_available"/>
                 <field name="uom_id"/>
+                <field name="currency_id" column_invisible="True"/>
             </list>
         </field>
     </record>
@@ -39,11 +42,12 @@
                             <div class="mb-1 fw-bold">
                                 <field name="fullname"/>
                             </div>
-                            <div>
-                                Code: <field name="code"/>
+                            <div class="text-muted">
+                                <field name="purpose"/>
                             </div>
+                            <div>Code: <field name="code"/></div>
                             <div>
-                                Cost: <field name="cost" widget="monetary"/>
+                                Cost: <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </div>
                             <div class="mt-1">
                                 On Hand: <field name="qty_available"/>
@@ -65,19 +69,19 @@
                         <label for="component_id" string="Component Family"/>
                         <h2><field name="component_id" placeholder="e.g. Screw M4"/></h2>
                         
-                        <label for="name" string="Execution Name (Suffix)"/>
+                        <label for="name" string="Execution Name"/>
                         <h1><field name="name" placeholder="e.g. 12 mm"/></h1>
                     </div>
 
                     <group>
                         <group>
                             <field name="code"/>
+                            <field name="purpose" placeholder="e.g. Short description..."/>
                             <field name="uom_id"/>
                         </group>
                         <group>
-                            <field name="cost" widget="monetary"/>
-                            <field name="material_cost" widget="monetary" readonly="1"/>
-                            
+                            <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="material_cost" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="qty_available"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
@@ -87,24 +91,31 @@
                         <page string="Specification" name="bom">
                             <field name="bom_line_ids">
                                 <list string="Components" editable="bottom">
-                                    <field name="component_id" width="30%" 
-                                           options="{'no_create': True}"/>
-                                           
+                                    <button name="action_open_analogs" 
+                                            type="object" 
+                                            icon="fa-external-link" 
+                                            title="Open"
+                                            width="1%"
+                                            string=" "/>
+
+                                    <field name="component_id" width="40%" options="{'no_create': False}"/>
+                                    
                                     <field name="nomenclature_ids" 
-                                           widget="many2many_tags" 
-                                           width="40%"
-                                           placeholder="Select specific executions..."
-                                           domain="[('component_id', '=', component_id)]"
-                                           options="{'no_create': True}"/>
-                                           
+                                        widget="many2many_tags" 
+                                        width="40%"
+                                        placeholder="Select executions..."
+                                        domain="[('component_id', '=', component_id)]"
+                                        context="{'default_component_id': component_id, 'show_short_name': True}" 
+                                        options="{'no_create': False}"/>
+                                        
                                     <field name="qty" width="10%"/>
-                                    <field name="cost" widget="monetary" width="10%"/>
-                                    <field name="total_cost" widget="monetary" width="10%"/>
+                                    <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}" width="10%"/>
+                                    <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}" width="10%"/>
                                     <field name="currency_id" column_invisible="True"/>
                                 </list>
                             </field>
                             <group class="oe_subtotal_footer oe_right">
-                                <field name="material_cost" widget="monetary"/>
+                                <field name="material_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </group>
                         </page>
 
@@ -112,11 +123,15 @@
                             <field name="parameter_ids">
                                 <list string="Technical Parameters" editable="bottom">
                                     <field name="sequence" widget="handle"/>
-                                    <field name="name" placeholder="Parameter (e.g. Length)"/>
+                                    <field name="name" placeholder="Parameter Name"/>
                                     <field name="value"/>
                                     <field name="uom_id" options="{'no_create': True}"/>
                                 </list>
                             </field>
+                        </page>
+                        
+                        <page string="Internal Notes" name="notes">
+                            <field name="description" placeholder="Internal notes..."/>
                         </page>
                     </notebook>
                 </sheet>
@@ -125,14 +140,8 @@
         </field>
     </record>
 
-    <menuitem id="dino_component_menu_root"
-              name="Components (Families)"
-              parent="stock.menu_stock_inventory_control" 
-              action="dino_component_action"
-              sequence="5"/>
-              
     <menuitem id="dino_nomenclature_menu"
-              name="Nomenclature (Executions)"
+              name="Nomenclature"
               parent="stock.menu_stock_inventory_control" 
               action="dino_nomenclature_action"
               sequence="6"/>

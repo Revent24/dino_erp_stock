@@ -6,11 +6,6 @@
         <field name="name">Component Families</field>
         <field name="res_model">dino.component</field>
         <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new Component Family (e.g. "Screw M4").
-            </p>
-        </field>
     </record>
 
     <record id="dino_component_view_tree" model="ir.ui.view">
@@ -31,6 +26,12 @@
         <field name="arch" type="xml">
             <form string="Component Family">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_nomenclatures" icon="fa-list">
+                            <field string="Items" name="nomenclature_count" widget="statinfo"/>
+                        </button>
+                    </div>
+
                     <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
                     
                     <div class="oe_title">
@@ -54,13 +55,22 @@
                     </group>
 
                     <notebook>
-                        <page string="Nomenclatures / Executions" name="nomenclatures">
+                        <page string="Nomenclatures" name="nomenclatures">
                             <field name="nomenclature_ids">
-                                <list string="Executions">
-                                    <field name="name"/>     <field name="code"/>     <field name="cost" widget="monetary"/>
+                                <list string="Executions" editable="bottom">
+                                    <button name="action_open_form" type="object" icon="fa-external-link" title="Open" width="30px" string=" "/>                                
+                                    <field name="name"/>
+                                    <field name="purpose"/>
+                                    <field name="code" optional="hide"/>
+                                    <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                     <field name="qty_available"/>
+                                    <field name="currency_id" column_invisible="True"/>
                                 </list>
                             </field>
+                        </page>
+                        
+                        <page string="Internal Notes" name="notes">
+                            <field name="description" placeholder="Internal notes..."/>
                         </page>
                     </notebook>
                 </sheet>
@@ -68,6 +78,12 @@
             </form>
         </field>
     </record>
+
+    <menuitem id="dino_component_menu_root"
+              name="Families"
+              parent="stock.menu_stock_inventory_control" 
+              action="dino_component_action"
+              sequence="5"/>
 
 </data>
 </odoo>

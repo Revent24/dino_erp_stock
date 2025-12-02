@@ -19,21 +19,20 @@ python3 -m odoo server -d dino24_dev -u dino_erp_stock --addons-path=addons,../o
 
 
 
-
-
-
-
-
-
-
-
 # 4. Запустить сервер с переустановкой модулей
 python3 -m odoo server -d dino24_dev -i dino_erp_stock --addons-path=addons,../odoo_projects/dino24_addons --db_user=steve --http-port=8070
+
+
+# 
+
 
 
 # Перейти на
 http://localhost:8070/odoo/discuss
 
+# ОПЕРАЦИИ С БАЗОЙ
+## Открыть базу
+sudo -u postgres psql -d dino24_dev
 
 # Обновление языков интерфейса
 # Экспорт руссого языка (ru.po)
