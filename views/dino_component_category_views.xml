@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_category_form_inherit_dino" model="ir.ui.view">
+        <field name="name">product.category.form.inherit.dino</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//div[@name='button_box']/button[.//field[@name='product_count']]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <div name="button_box" position="inside">
+                
+                <button class="oe_stat_button" 
+                        name="action_view_dino_components"
+                        type="object"
+                        icon="fa-sitemap">
+                    <field string="Families" name="dino_component_count" widget="statinfo"/>
+                </button>
+                
+                <button class="oe_stat_button" 
+                        name="action_view_dino_nomenclatures"
+                        type="object"
+                        icon="fa-list">
+                    <field string="Items" name="dino_nomenclature_count" widget="statinfo"/>
+                </button>
+            </div>
+
+            <group name="first" position="after">
+                <group>
+                    <group string="Configuration" name="dino_config">
+                        <field name="hide_specification"/>
+                    </group>
+                    
+                    <group string="Origin" name="dino_origin">
+                        <field name="origin_type" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                </group>
+            </group>
+            
+        </field>
+    </record>
+</odoo>

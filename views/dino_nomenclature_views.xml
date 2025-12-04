@@ -17,7 +17,7 @@
         <field name="name">dino.nomenclature.view.list</field>
         <field name="model">dino.nomenclature</field>
         <field name="arch" type="xml">
-            <list string="Nomenclature" create="false">
+            <list string="Nomenclature" create="true">
                 <field name="fullname"/>
                 <field name="purpose" optional="show"/>
                 <field name="code" optional="hide"/>
@@ -33,7 +33,7 @@
         <field name="name">dino.nomenclature.view.kanban</field>
         <field name="model">dino.nomenclature</field>
         <field name="arch" type="xml">
-            <kanban create="false">
+            <kanban create="true">
                 <field name="id"/>
                 <field name="currency_id"/>
                 <templates>
@@ -107,7 +107,9 @@
                                    readonly="id"/>
                             <field name="name" placeholder="e.g. 810 mm"/>
                             <field name="purpose"/>
-                            
+                            <field name="origin_type" widget="badge" 
+                                   decoration-info="origin_type == 'purchase'" 
+                                   decoration-warning="origin_type == 'production'"/>
                         </group>
                         <group>
                             <field name="category_id"/>
@@ -120,7 +122,7 @@
                     </group>
 
                     <notebook>
-                        <page string="Specification" name="bom">
+                        <page string="Specification" name="bom" invisible="hide_specification">
                             <field name="bom_line_ids">
                                 <list string="Components" editable="bottom">
                                     <field name="sequence" widget="handle"/>

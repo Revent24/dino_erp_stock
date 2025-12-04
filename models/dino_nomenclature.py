@@ -23,6 +23,12 @@ class DinoNomenclature(models.Model):
     # Единица измерения (берется от родителя, только чтение)
     uom_id = fields.Many2one(related='component_id.uom_id', string=_('Unit of Measure'), readonly=True)
 
+    # Скрыть спецификацию (Берем значение из настройки категории)
+    hide_specification = fields.Boolean(related='category_id.hide_specification', readonly=True)
+
+    # Тип происхождения (Берем значение из настройки категории)
+    origin_type = fields.Selection(related='category_id.origin_type', string=_('Origin Type'), readonly=True, store=True)
+
     # === НАИМЕНОВАНИЕ ===
     # Суффикс - уникальная характеристика этого исполнения (напр. "810 мм" или "Оцинкованный")
     name = fields.Char(string=_('Execution Name'), required=True, tracking=True, translate=True)
