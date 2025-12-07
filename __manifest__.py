@@ -26,6 +26,7 @@
         # 3. Интерфейс (Views)
         'views/dino_component_views.xml',    # Меню и формы Семейств
         'views/dino_nomenclature_views.xml', # Меню и формы Номенклатуры
+        'views/dino_nomenclature_quick_create.xml', # Упрощенная форма создания
         'views/dino_component_category_views.xml', # <-Форма категорий
     ],
     'installable': True,
