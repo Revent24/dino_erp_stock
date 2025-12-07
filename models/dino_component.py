@@ -3,6 +3,7 @@
 #
 
 from odoo import fields, models, _, api
+from odoo.exceptions import ValidationError
 
 class DinoComponent(models.Model):
     _name = 'dino.component'
@@ -46,6 +47,15 @@ class DinoComponent(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'Component Family name must be unique!'),
     ]
+
+    @api.constrains('name')
+    def _check_name_unique(self):
+        """Проверка уникальности наименования компонента"""
+        for rec in self:
+            if rec.name:
+                domain = [('name', '=', rec.name), ('id', '!=', rec.id)]
+                if self.search_count(domain) > 0:
+                    raise ValidationError(_('Component with name "%s" already exists! Please use a unique name.') % rec.name)
 
     def toggle_is_favorite(self):
         for rec in self:
