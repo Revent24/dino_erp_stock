@@ -21,7 +21,7 @@
                 <field name="fullname"/>
                 <field name="purpose" optional="show"/>
                 <field name="code" optional="hide"/>
-                <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="qty_available"/>
                 <field name="uom_id"/>
                 <field name="currency_id" column_invisible="True"/>
@@ -41,7 +41,7 @@
                         <main class="pe-2">
                             <div class="mb-1 fw-bold"><field name="fullname"/></div>
                             <div class="text-muted"><field name="purpose"/></div>
-                            <div>Cost: <field name="cost" widget="monetary"/></div>
+                            <div>Cost: <field name="total_cost" widget="monetary"/></div>
                         </main>
                     </t>
                 </templates>
@@ -120,8 +120,7 @@
                         <group>
                             <field name="category_id"/>
                             <field name="code"/>
-                            <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                            <field name="material_cost" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="qty_available"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
@@ -148,9 +147,6 @@
                                     <field name="currency_id" column_invisible="True"/>
                                 </list>
                             </field>
-                            <group class="oe_subtotal_footer oe_right">
-                                <field name="material_cost" widget="monetary" options="{'currency_field': 'currency_id'}" class="oe_subtotal_footer_separator"/>
-                            </group>
                             <separator string="Internal Notes"/>
                             <field name="description" placeholder="Add instructions or notes..."/>
                         </page>

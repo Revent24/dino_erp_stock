@@ -36,7 +36,7 @@
                             </div>
                             
                             <span>
-                                Cost: <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                Total Cost: <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </span>
                             
                             <div class="mt-1">
@@ -61,7 +61,7 @@
         <field name="arch" type="xml">
             <list string="Components">
                 <field name="name"/>
-                <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="qty_available"/>
             </list>
         </field>
@@ -92,7 +92,7 @@
                     
                     <group>
                         <group>
-                            <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
                         <group>

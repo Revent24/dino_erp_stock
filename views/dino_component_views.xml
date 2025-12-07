@@ -62,7 +62,7 @@
                                     <field name="name"/>
                                     <field name="purpose"/>
                                     <field name="code" optional="hide"/>
-                                    <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                     <field name="qty_available"/>
                                     <field name="currency_id" column_invisible="True"/>
                                 </list>

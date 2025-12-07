@@ -43,7 +43,7 @@ class DinoNomenclature(models.Model):
 
     # === ЭКОНОМИКА ===
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
-    cost = fields.Monetary(string=_('Cost'), currency_field='currency_id', default=0.0, tracking=True, readonly=True, help="Automatically updated from latest purchase document")
+    cost = fields.Monetary(string=_('Purchase Price'), currency_field='currency_id', default=0.0, tracking=True, readonly=True, help="Price from latest purchase document")
     qty_available = fields.Float(string=_('On Hand'), default=0.0, tracking=True)
 
     # === ВЛОЖЕННЫЕ ТАБЛИЦЫ (Создадим модели для них на следующих шагах) ===
@@ -53,8 +53,8 @@ class DinoNomenclature(models.Model):
     # Спецификация (Состав)
     bom_line_ids = fields.One2many('dino.bom.line', 'parent_nomenclature_id', string=_('Bill of Materials'))
 
-    # Стоимость материалов (Сумма BOM)
-    material_cost = fields.Monetary(string=_('Material Cost'), compute='_compute_material_cost', currency_field='currency_id', store=True)
+    # Полная стоимость = Цена закупки + Сумма материалов по BOM
+    total_cost = fields.Monetary(string=_('Total Cost'), compute='_compute_total_cost', currency_field='currency_id', store=True)
 
     # Назначение исполнения (краткая заметка к названию)
     purpose = fields.Char(string=_('Purpose'), translate=True, help="Short description of the execution")
@@ -102,11 +102,108 @@ class DinoNomenclature(models.Model):
             else:
                 rec.fullname = rec.name or rec.component_id.name
 
-    # Расчет стоимости по BOM
-    @api.depends('bom_line_ids.total_cost')
-    def _compute_material_cost(self):
+    # Расчет полной стоимости: цена закупки + материалы
+    @api.depends('cost', 'bom_line_ids.total_cost')
+    def _compute_total_cost(self):
         for rec in self:
-            rec.material_cost = sum(line.total_cost for line in rec.bom_line_ids)
+            materials_sum = sum(line.total_cost for line in rec.bom_line_ids)
+            rec.total_cost = rec.cost + materials_sum
+    
+    def _recompute_parent_assemblies(self):
+        """
+        Итеративный метод пересчета стоимости (снизу-вверх).
+        Вместо рекурсии используется цикл while, который поднимается по уровням вложенности.
+        На каждом уровне происходит жесткая фиксация цен в БД через SQL.
+        """
+        if not self:
+            return
+
+        # Начинаем с текущих номенклатур (у которых изменилась цена или структура)
+        current_level_nomenclatures = self
+        
+        # Защита от бесконечных циклов (если есть циклические зависимости в BOM)
+        max_iterations = 100
+        iteration = 0
+        
+        # Технические поля для SQL запросов
+        bom_line_model = self.env['dino.bom.line']
+        m2m_table = bom_line_model._fields['nomenclature_ids'].relation
+        m2m_col1 = bom_line_model._fields['nomenclature_ids'].column1 # bom_line_id
+        m2m_col2 = bom_line_model._fields['nomenclature_ids'].column2 # nomenclature_id
+
+        while current_level_nomenclatures and iteration < max_iterations:
+            iteration += 1
+            
+            # 1. ОБНОВЛЕНИЕ НОМЕНКЛАТУР ТЕКУЩЕГО УРОВНЯ
+            # Пересчитываем total_cost = cost + sum(bom_lines)
+            # Делаем это SQL-запросом, чтобы гарантировать, что в БД лежат актуальные цифры.
+            # Для самого первого уровня (компонентов) это обновит total_cost на основе их новой cost.
+            # Для следующих уровней (сборок) это обновит total_cost на основе обновленных BOM-линий.
+            
+            ids_tuple = tuple(current_level_nomenclatures.ids)
+            self.env.cr.execute("""
+                UPDATE dino_nomenclature n
+                SET total_cost = n.cost + COALESCE((
+                    SELECT SUM(bl.total_cost)
+                    FROM dino_bom_line bl
+                    WHERE bl.parent_nomenclature_id = n.id
+                ), 0)
+                WHERE n.id IN %s
+            """, (ids_tuple,))
+            
+            # Сбрасываем кэш, чтобы UI увидел изменения
+            current_level_nomenclatures.invalidate_recordset(['total_cost'])
+            
+            # 2. ПОИСК ЗАВИСИМОСТЕЙ (Где используются эти номенклатуры?)
+            # Ищем строки BOM, в которых участвуют текущие номенклатуры как компоненты/аналоги
+            bom_lines = bom_line_model.sudo().search([
+                ('nomenclature_ids', 'in', current_level_nomenclatures.ids)
+            ])
+            
+            if not bom_lines:
+                # Если эти номенклатуры нигде не используются, цепочка завершена
+                break
+                
+            # 3. ОБНОВЛЕНИЕ СТРОК BOM
+            # Пересчитываем стоимость строк BOM, ссылающихся на текущий уровень.
+            # cost = Среднее(total_cost аналогов)
+            # total_cost = qty * cost
+            
+            bom_line_ids = tuple(bom_lines.ids)
+            
+            self.env.cr.execute(f"""
+                WITH avg_costs AS (
+                    SELECT rel.{m2m_col1} as bom_line_id, COALESCE(AVG(n.total_cost), 0) as avg_cost
+                    FROM {m2m_table} rel
+                    JOIN dino_nomenclature n ON rel.{m2m_col2} = n.id
+                    WHERE rel.{m2m_col1} IN %s
+                    GROUP BY rel.{m2m_col1}
+                )
+                UPDATE dino_bom_line bl
+                SET 
+                    cost = ac.avg_cost,
+                    total_cost = bl.qty * ac.avg_cost
+                FROM avg_costs ac
+                WHERE bl.id = ac.bom_line_id
+            """, (bom_line_ids,))
+            
+            # Сбрасываем кэш строк BOM
+            bom_lines.invalidate_recordset(['cost', 'total_cost'])
+            
+            # 4. ПЕРЕХОД НА СЛЕДУЮЩИЙ УРОВЕНЬ
+            # Родители этих строк BOM становятся "текущим уровнем" для следующей итерации
+            next_level_parents = bom_lines.mapped('parent_nomenclature_id')
+            current_level_nomenclatures = next_level_parents
+    
+    def write(self, vals):
+        """При изменении cost или total_cost - пересчитываем всех родителей"""
+        result = super().write(vals)
+        
+        # Если изменились cost или total_cost - запускаем пересчет вверх
+        if 'cost' in vals or 'total_cost' in vals:
+            self._recompute_parent_assemblies()
+        
+        return result
 
     # Метод для кнопки "Стрелочка"
     def action_open_form(self):

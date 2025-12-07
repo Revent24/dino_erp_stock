@@ -68,15 +68,17 @@ class DinoBomLine(models.Model):
             }
     # ============================================
 
-    @api.depends('nomenclature_ids.cost')
+    @api.depends('nomenclature_ids.total_cost')
     def _compute_cost(self):
+        """Рекурсивный расчет: цена = средняя полная стоимость аналогов"""
         for line in self:
             total_price = 0.0
             count = 0
             
-            # Складываем цены всех выбранных исполнений
+            # Складываем полную стоимость всех выбранных исполнений
             for nom in line.nomenclature_ids:
-                total_price += nom.cost
+                # total_cost уже включает цену закупки + материалы (рекурсивно)
+                total_price += nom.total_cost
                 count += 1
             
             # Считаем среднее

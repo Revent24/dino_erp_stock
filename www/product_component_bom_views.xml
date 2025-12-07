@@ -60,7 +60,6 @@
                                            domain="[('attribute_id', 'in', valid_attribute_ids)]"/>
                                            
                                     <field name="qty" width="10%"/>
-                                    <field name="cost" widget="monetary" options="{'currency_field': 'currency_id'}" width="10%"/>
                                     <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}" width="10%"/>
                                     <field name="currency_id" column_invisible="True"/>
                                 </list>
